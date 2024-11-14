@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:35:28 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/14 21:28:30 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/14 21:39:10 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	ft_check_all_fork(t_philo *philo)
 {
+	if (philo->next == philo)
+		return (1);
 	pthread_mutex_lock(philo->mutex_for_fork);
 	if (philo->next->next_fork == true && philo->pre->next_fork == true)
 	{
