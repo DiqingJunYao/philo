@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:56:19 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/14 20:36:46 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/14 22:06:50 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_philo	*ft_fill(char **argv, int i)
 	temp->t_t_death = ft_atoi(argv[2]);
 	temp->t_t_live = 0;
 	temp->fork = 0;
+	temp->last_sleep_time = 0;
 	temp->n_philo = i;
 	temp->live_status = 0;
 	temp->next = NULL;
