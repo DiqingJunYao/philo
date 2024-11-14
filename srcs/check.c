@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:35:28 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/14 18:09:46 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/14 21:28:30 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,27 @@
 int	ft_check_all_fork(t_philo *philo)
 {
 	pthread_mutex_lock(philo->mutex_for_fork);
-	if (philo->fork == true || philo->next->fork == true)
+	if (philo->next->next_fork == true && philo->pre->next_fork == true)
 	{
 		pthread_mutex_unlock(philo->mutex_for_fork);
 		return (1);
 	}
-	else
+	else if (philo->next->next_fork == true && philo->pre->next_fork == false
+		&& philo->fork == true)
 	{
-		pthread_mutex_unlock(philo->mutex_for_fork);
-		return (0);
-	}
-}
-
-int	ft_check_next_fork(t_philo *philo)
-{
-	pthread_mutex_lock(philo->mutex_for_fork);
-	if (philo->next->fork == true)
-	{
+		philo->fork = false;
 		pthread_mutex_unlock(philo->mutex_for_fork);
 		return (1);
 	}
-	else
+	else if (philo->next->next_fork == false && philo->pre->next_fork == false)
 	{
 		pthread_mutex_unlock(philo->mutex_for_fork);
 		return (0);
+	}
+	else
+	{
+		pthread_mutex_unlock(philo->mutex_for_fork);
+		return (1);
 	}
 }
 

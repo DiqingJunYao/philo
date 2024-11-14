@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:56:19 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/14 18:09:18 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/14 20:36:46 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_philo	*ft_fill(char **argv, int i)
 	temp->fork = 0;
 	temp->n_philo = i;
 	temp->live_status = 0;
-	temp->total = ft_atoi(argv[1]);
 	temp->next = NULL;
 	return (temp);
 }
@@ -62,11 +61,13 @@ t_philo	*ft_input(char **argv, pthread_mutex_t *mutex,
 		temp1 = temp;
 		temp = ft_fill(argv, j);
 		ft_fill_mutex(temp, mutex, mutex_for_fork, mutex_for_death);
+		temp->pre = temp1;
 		temp1->next = temp;
 		i--;
 		j++;
 	}
 	temp->next = first;
+	first->pre = temp;
 	return (first);
 }
 

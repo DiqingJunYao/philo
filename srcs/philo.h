@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:38:48 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/14 18:47:12 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/14 21:26:49 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ typedef struct s_philo
 	int				t_t_live;		//time to live
 	bool			fork;			//fork in 0 and 1
 	int				n_philo;		//the number of the philo
-	int				total;
+	bool			next_fork;
 	bool			live_status;
 	struct timeval	t_last_check;
 	pthread_mutex_t	*mutex;
 	pthread_mutex_t	*mutex_for_fork;
 	pthread_mutex_t	*mutex_for_death;
+	struct s_philo	*pre;
 	struct s_philo	*next;
 }	t_philo;
 
@@ -48,7 +49,6 @@ void	ft_print_eating(struct timeval start_time, t_philo *philo);
 void	ft_taken_fork(struct timeval start_time, t_philo *philo);
 void	ft_usleep(int time);
 int		ft_check_all_fork(t_philo *philo);
-int		ft_check_next_fork(t_philo *philo);
 void	ft_stop_all(t_philo *philo);
 int		ft_check_death_v2(struct timeval start_time, t_philo *philo);
 void	ft_print_everything(t_philo *philo, int current_status, int time);
