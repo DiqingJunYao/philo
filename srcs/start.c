@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 14:25:34 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/24 21:34:15 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 22:38:26 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	*ft_print(void *args)
 	}
 	while (1)
 	{
-		if (philo->n_t_eat != 0 && i == philo->n_t_eat - 1)
+		if (philo->n_t_eat != 0 && i == philo->n_t_eat)
 			break ;
 		if (ft_print_thread(philo) == 1)
 			return (NULL);

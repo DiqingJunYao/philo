@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:38:48 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/24 21:58:29 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 22:59:07 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void	ft_print_everything(t_philo *philo, int current_status, int time);
 void	ft_print_nod(t_philo *philo);
 void	ft_check_death_v3(struct timeval start_time, t_philo *philo);
 int		ft_check_death(struct timeval start_time, t_philo *philo);
+void	ft_check_eaten_time(struct timeval start_time, t_philo *philo);
 
 #endif
