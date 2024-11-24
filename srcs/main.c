@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:37:53 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/24 21:33:53 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 21:55:28 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ft_print_nod(t_philo *philo)
 	printf("this is the time to live :%d\n", philo->t_t_live);
 	printf("this is the fork :%d\n", philo->fork);
 	printf("this is the number of philo :%d\n", philo->n_philo);
-	printf("this is the last sleep time of philo :%d\n",
-		philo->last_sleep_time);
+	printf("this is the last eat time of philo :%d\n",
+		philo->last_eat_time);
 	pthread_mutex_unlock(philo->mutex);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:59:06 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/24 21:34:34 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 21:55:34 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ void	ft_taken_fork(struct timeval start_time, t_philo *philo)
 	struct timeval	current_time;
 	int				time;
 
-	pthread_mutex_lock(philo->mutex_for_fork);
-	philo->fork = true;
-	philo->next_fork = false;
-	pthread_mutex_unlock(philo->mutex_for_fork);
 	if (ft_check_all_fork(philo))
 		ft_print_thinking(start_time, philo);
 	while (1)
@@ -50,6 +46,10 @@ void	ft_taken_fork(struct timeval start_time, t_philo *philo)
 		if (ft_check_death_v2(start_time, philo))
 			return ;
 	}
+	pthread_mutex_lock(philo->mutex_for_fork);
+	philo->fork = true;
+	philo->next_fork = false;
+	pthread_mutex_unlock(philo->mutex_for_fork);
 	gettimeofday(&current_time, NULL);
 	time = (current_time.tv_sec - start_time.tv_sec) * 1000
 		+ (current_time.tv_usec - start_time.tv_usec) / 1000;
@@ -98,7 +98,7 @@ int	ft_print_sleeping(struct timeval start_time, t_philo *philo)
 	time = (current_time.tv_sec - start_time.tv_sec) * 1000
 		+ (current_time.tv_usec - start_time.tv_usec) / 1000;
 	ft_print_everything(philo, 2, time);
-	philo->last_sleep_time = time + philo->t_t_live;
+	philo->last_eat_time = time + philo->t_t_live;
 	if (philo->t_t_sleep < philo->t_t_death)
 		ft_usleep(philo->t_t_sleep);
 	else
