@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:56:33 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/24 22:58:58 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 23:22:41 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	ft_print_everything(t_philo *philo, int current_status, int time)
 
 void	ft_check_eaten_time(struct timeval start_time, t_philo *philo)
 {
+	(void)start_time;
 	if (philo->total % 2 == 1)
 	{
 		if (philo->eaten_number >= 1)
 		{
 			philo->eaten_number = 0;
-			ft_print_thinking(start_time, philo);
-			ft_usleep(philo->t_t_eat);
+			ft_usleep(2);
 		}
 	}
 }
