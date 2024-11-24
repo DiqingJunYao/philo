@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:37:53 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/13 22:41:39 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 21:33:53 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	ft_print_nod(t_philo *philo)
 {
-	while (philo)
-	{
-		printf("this is the time to eat :%d\n", philo->t_t_eat);
-		printf("this is the number to eat :%d\n", philo->n_t_eat);
-		printf("this is the time to sleep :%d\n", philo->t_t_sleep);
-		printf("this is the time to death :%d\n", philo->t_t_death);
-		printf("this is the time to live :%d\n", philo->t_t_live);
-		printf("this is the fork :%d\n", philo->fork);
-		printf("this is the number of philo :%d\n", philo->n_philo);
-		philo = philo->next;
-	}
+	pthread_mutex_lock(philo->mutex);
+	printf("this is the time to eat :%d\n", philo->t_t_eat);
+	printf("this is the number to eat :%d\n", philo->n_t_eat);
+	printf("this is the time to sleep :%d\n", philo->t_t_sleep);
+	printf("this is the time to death :%d\n", philo->t_t_death);
+	printf("this is the time to live :%d\n", philo->t_t_live);
+	printf("this is the fork :%d\n", philo->fork);
+	printf("this is the number of philo :%d\n", philo->n_philo);
+	printf("this is the last sleep time of philo :%d\n",
+		philo->last_sleep_time);
+	pthread_mutex_unlock(philo->mutex);
 }
 
 void	ft_free(t_philo *philo)

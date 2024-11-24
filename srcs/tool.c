@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:59:06 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/14 22:08:19 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 21:34:34 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 
 void	ft_usleep(int time)
 {
-	long int	i;
+	long int		i;
+	struct timeval	start;
+	struct timeval	end;
 
 	i = 0;
-	while (i < time)
+	gettimeofday(&start, NULL);
+	while (1)
 	{
-		usleep(1000);
-		i++;
+		gettimeofday(&end, NULL);
+		i = (end.tv_sec * 1000 + end.tv_usec / 1000) - (start.tv_sec * 1000
+				+ start.tv_usec / 1000);
+		if (i >= time)
+			break ;
+		usleep(100);
 	}
 }
 
@@ -64,6 +71,7 @@ void	ft_print_eating(struct timeval start_time, t_philo *philo)
 		if (ft_check_death_v2(start_time, philo))
 			return ;
 	}
+	ft_check_death_v3(start_time, philo);
 	gettimeofday(&current_time, NULL);
 	pthread_mutex_lock(philo->mutex_for_fork);
 	philo->fork = true;
@@ -94,8 +102,8 @@ int	ft_print_sleeping(struct timeval start_time, t_philo *philo)
 	if (philo->t_t_sleep < philo->t_t_death)
 		ft_usleep(philo->t_t_sleep);
 	else
-		ft_usleep(philo->t_t_death - 30);
-	ft_check_death_v2(start_time, philo);
+		ft_usleep(philo->t_t_death);
+	ft_check_death_v2(current_time, philo);
 	gettimeofday(&current_time, NULL);
 	time = (current_time.tv_sec - start_time.tv_sec) * 1000
 		+ (current_time.tv_usec - start_time.tv_usec) / 1000;

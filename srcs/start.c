@@ -6,50 +6,11 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 14:25:34 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/14 22:11:19 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 21:34:15 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_check_death(struct timeval start_time, t_philo *philo)
-{
-	struct timeval	current_time;
-	int				time;
-
-	gettimeofday(&current_time, NULL);
-	if (!philo->t_last_check.tv_usec)
-		time = (current_time.tv_sec - start_time.tv_sec) * 1000
-			+ (current_time.tv_usec - start_time.tv_usec) / 1000;
-	else
-		time = (current_time.tv_sec - philo->t_last_check.tv_sec) * 1000
-			+ (current_time.tv_usec - philo->t_last_check.tv_usec) / 1000;
-	if (time >= philo->t_t_death)
-	{
-		ft_print_everything(philo, 4, time);
-		ft_stop_all(philo);
-		return (1);
-	}
-	return (0);
-}
-
-int	ft_check_death_v2(struct timeval start_time, t_philo *philo)
-{
-	struct timeval	current_time;
-	int				time;
-
-	gettimeofday(&current_time, NULL);
-	time = (current_time.tv_sec - start_time.tv_sec) * 1000
-		+ (current_time.tv_usec - start_time.tv_usec) / 1000;
-	if (time >= philo->t_t_death || (time + philo->t_t_live
-			- philo->last_sleep_time) >= philo->t_t_death)
-	{
-		ft_print_everything(philo, 4, time);
-		ft_stop_all(philo);
-		return (1);
-	}
-	return (0);
-}
 
 int	ft_print_thread(t_philo *philo)
 {
@@ -87,7 +48,11 @@ void	*ft_print(void *args)
 
 	i = 0;
 	philo = (t_philo *)args;
-	usleep(10 * philo->n_philo);
+	if (philo->n_philo % 2 == 1)
+	{
+		ft_print_everything(philo, 3, philo->t_t_live);
+		usleep(philo->t_t_eat / 2);
+	}
 	while (1)
 	{
 		if (philo->n_t_eat != 0 && i == philo->n_t_eat - 1)
@@ -106,7 +71,7 @@ void	ft_start(int number, t_philo *philo)
 
 	i = 0;
 	threads = malloc(number * sizeof(pthread_t));
-	while (number > 0)
+	while (i < number)
 	{
 		while (1)
 		{
@@ -117,10 +82,9 @@ void	ft_start(int number, t_philo *philo)
 		if (pthread_create(&threads[i], NULL, ft_print, (void *)philo) != 0)
 			perror("Thread creation failed");
 		i++;
-		number--;
 	}
 	i = 0;
-	while (threads[i])
+	while (i < number)
 	{
 		pthread_join(threads[i], NULL);
 		i++;
