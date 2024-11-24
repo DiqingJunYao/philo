@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:59:06 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/24 21:55:34 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 22:14:49 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ void	ft_taken_fork(struct timeval start_time, t_philo *philo)
 	struct timeval	current_time;
 	int				time;
 
+	if (philo->total % 2 == 1)
+	{
+		if (philo->eaten_number >= 1)
+		{
+			philo->eaten_number = 0;
+			ft_print_thinking(start_time, philo);
+			ft_usleep(philo->t_t_eat);
+		}
+	}
 	if (ft_check_all_fork(philo))
 		ft_print_thinking(start_time, philo);
 	while (1)
@@ -82,6 +91,7 @@ void	ft_print_eating(struct timeval start_time, t_philo *philo)
 		+ (current_time.tv_usec - start_time.tv_usec) / 1000;
 	ft_print_everything(philo, 1, time);
 	ft_usleep(philo->t_t_eat);
+	philo->eaten_number++;
 }
 
 int	ft_print_sleeping(struct timeval start_time, t_philo *philo)

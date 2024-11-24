@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:56:19 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/24 21:56:17 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 21:58:42 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_philo	*ft_fill(char **argv, int i)
 	temp->n_philo = i;
 	temp->live_status = 0;
 	temp->next = NULL;
+	temp->eaten_number = 0;
 	temp->total = ft_atoi(argv[1]);
 	return (temp);
 }

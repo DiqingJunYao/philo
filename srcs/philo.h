@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:38:48 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/24 21:55:44 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 21:58:29 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo
 	bool			live_status;
 	int				last_eat_time;
 	int				total;
+	int				eaten_number;
 	struct timeval	t_last_check;
 	pthread_mutex_t	*mutex;
 	pthread_mutex_t	*mutex_for_fork;

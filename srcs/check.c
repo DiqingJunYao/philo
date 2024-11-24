@@ -6,7 +6,7 @@
 /*   By: dyao <dyao@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 21:35:28 by dyao              #+#    #+#             */
-/*   Updated: 2024/11/24 21:55:03 by dyao             ###   ########.fr       */
+/*   Updated: 2024/11/24 22:25:29 by dyao             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_check_death_v3(struct timeval start_time, t_philo *philo)
 	time = (current_time.tv_sec - start_time.tv_sec) * 1000
 		+ (current_time.tv_usec - start_time.tv_usec) / 1000;
 	if ((time + philo->t_t_live - philo->last_eat_time
-			+ philo->t_t_eat) >= philo->t_t_death)
+			+ philo->t_t_eat) >= philo->t_t_death + 3)
 	{
 		ft_usleep(philo->t_t_death - time);
 		gettimeofday(&current_time, NULL);
